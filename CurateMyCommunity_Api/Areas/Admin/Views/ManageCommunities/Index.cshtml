@@ -1,0 +1,57 @@
+﻿@model List<CurateMyCommunity_Api.Areas.Admin.Models.ManageCommunities.ManageCommunityViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Communities</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "ManageCommunities")
+</p>
+
+@using (Html.BeginForm("Delete", "ManageCommunities"))
+{
+<table class="table">
+    <tr>
+        <th>
+            &nbsp;
+        </th>
+        <th>
+            Community
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            State
+        </th>
+        <th></th>
+    </tr>
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    var item = Model[i];
+    <tr>
+        <td>
+            @Html.HiddenFor(x => Model[i].id_communities)
+            @Html.CheckBoxFor(x => Model[i].is_selected)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.community)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id_communities })
+        </td>
+    </tr>
+}
+
+</table>
+<button type="submit" class="btn btn-danger">Delete Selected</button>
+}
