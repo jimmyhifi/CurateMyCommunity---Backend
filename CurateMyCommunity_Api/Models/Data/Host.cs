@@ -10,7 +10,7 @@ namespace CurateMyCommunity_Api.Models.Data
     [Table("tbl_hosts")]
     public class Host
     {
-        [Key]
+        [Key, Column("id_hosts"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_hosts { get; set; }
         public string host_name { get; set; }
         public string twitter_handle { get; set; }

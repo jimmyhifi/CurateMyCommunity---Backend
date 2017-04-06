@@ -10,7 +10,7 @@ namespace CurateMyCommunity_Api.Models.Data
     [Table("tbl_roles")]
     public class Role
     {
-        [Key]
+        [Key, Column("id_roles"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_roles { get; set; }
 
         public string role_name { get; set; }

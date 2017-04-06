@@ -10,8 +10,7 @@ namespace CurateMyCommunity_Api.Models.Data
     [Table("tbl_users")]
     public class User
     {
-        [Key]
-        [Column("id_users", Order = 0)]
+        [Key, Column("id_users"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_users { get; set; }
         public Nullable<int> firebase_id { get; set; }
         public string firstname { get; set; }
@@ -19,8 +18,7 @@ namespace CurateMyCommunity_Api.Models.Data
         public string email { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-
-        [Column("date_created"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("date_created")]
         public DateTime date_created { get; set; }
     }
 }

@@ -10,11 +10,13 @@ namespace CurateMyCommunity_Api.Models.Data
     [Table("tbl_user_roles")]
     public class UserRole
     {
-        [Key]
-        [Column("tbl_id_users", Order = 0)]
+        [Key, Column("id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
+        [Column("tbl_id_users", Order = 1)]
         public int id_user_roles { get; set; }
 
-        [Column("tbl_id_roles", Order = 1)]
+        [Column("tbl_id_roles", Order = 2)]
         public int tbl_id_roles { get; set; }
 
         [ForeignKey("tbl_id_roles")]
