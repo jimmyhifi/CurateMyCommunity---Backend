@@ -82,7 +82,7 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                     lastname = newSession.lastname,
                     email = newSession.email,
                     username = newSession.username,
-                    password = newSession.password,
+                    password = PasswordStorage.CreateHash(newSession.password),
                     date_created = DateTime.Now
                 };
                 // add to db context
@@ -165,7 +165,7 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
 
                 if (needsPasswordReset)
                 {
-                    userDTO.password = editVM.password;
+                    userDTO.password = PasswordStorage.CreateHash(editVM.password);
                 }
                 // save changes
                 context.SaveChanges();

@@ -170,6 +170,7 @@
     <Compile Include="Areas\Admin\Models\ManageUsers\CreateUserViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ManageUsers\EditUserViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ManageUsers\ManageUserViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ManageUsers\PasswordStorage.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Models\ManageUsers\License.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

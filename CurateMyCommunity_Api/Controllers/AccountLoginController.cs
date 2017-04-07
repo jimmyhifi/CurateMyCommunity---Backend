@@ -1,4 +1,5 @@
-﻿using CurateMyCommunity_Api.Models.Data;
+﻿using CurateMyCommunity_Api.Areas.Admin.Models.ManageUsers;
+using CurateMyCommunity_Api.Models.Data;
 using CurateMyCommunity_Api.Models.ViewModels.Account;
 using System;
 using System.Collections.Generic;
@@ -50,12 +51,14 @@ namespace CurateMyCommunity_Api.Controllers
             bool isValid = false;
             using (CMC_DB_Connection context = new CMC_DB_Connection())
             {
+                //search for logging in user
+                Models.Data.User UserDTO = context.Users.FirstOrDefault(x => x.username == loginUser.username);
+                // get current users hashed password
+                string correcthash = UserDTO.password;
                 //hash password
-
+                bool passwordhash = PasswordStorage.VerifyPassword(loginUser.password, correcthash);
                 //query for user based on username and password hash
-                if (context.Users.Any(row => row.username.Equals(loginUser.username)
-                 && row.password.Equals(loginUser.password)
-                ))
+                if (context.Users.Any(row => row.username.Equals(loginUser.username)) && passwordhash)
                 {
                     isValid = true;
                 }
