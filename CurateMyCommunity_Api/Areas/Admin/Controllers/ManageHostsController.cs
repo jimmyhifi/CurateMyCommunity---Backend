@@ -17,10 +17,10 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
             List<ManageHostViewModel> collectionOfHostsVM = new List<ManageHostViewModel>();
             using (CMC_DB_Connection context = new CMC_DB_Connection())
             {
-                //Get all Sessions
+                //Get all Hosts
                 var dbHost = context.Hosts;
 
-                //Move Sessions into a viewmodel object
+                //Move hosts into a viewmodel object
                 foreach (var hostDTO in dbHost)
                 {
                     collectionOfHostsVM.Add(

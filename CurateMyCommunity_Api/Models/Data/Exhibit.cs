@@ -18,13 +18,13 @@ namespace CurateMyCommunity_Api.Models.Data
         public string name { get; set; }
         public string description { get; set; }
 
-        [Column("tbl_id_communities", Order = 1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("tbl_id_communities", Order = 1)]
         public int tbl_id_communities { get; set; }
 
         [ForeignKey("tbl_id_communities")]
         public virtual Community id_community { get; set; }
 
-        [Column("tbl_id_images", Order = 2), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("tbl_id_images", Order = 2)]
         public int tbl_id_images { get; set; }
 
         [ForeignKey("tbl_id_images")]

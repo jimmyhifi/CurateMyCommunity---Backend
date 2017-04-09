@@ -54,19 +54,22 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
             //Create an instance of our DbContext
             using (CMC_DB_Connection context = new CMC_DB_Connection())
             {
-                //Make sure the username is unique
+                //get host name
+
+                //Make sure the community is unique
                 if (context.Communities.Any(row => row.community.Equals(newCommunity.community)))
                 {
                     ModelState.AddModelError("", "Community already exists. Try Again.");
                     newCommunity.community = "";
                     return View(newCommunity);
                 }
-                //Create our session DTO
+                //Create our community DTO
                 Community newCommunityDTO = new CurateMyCommunity_Api.Models.Data.Community()
                 {
                     community = newCommunity.community,
                     city = newCommunity.city,
-                    state = newCommunity.state
+                    state = newCommunity.state,
+                    tbl_id_hosts = newCommunity.id_host
             };
                 //Add to DbContext
                 newCommunityDTO = context.Communities.Add(newCommunityDTO);
@@ -81,7 +84,7 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            // Get the session by Id
+            // Get the community by Id
 
             EditCommunityViewModel editCommunityVM;
             using (CMC_DB_Connection context = new CMC_DB_Connection())
@@ -99,7 +102,8 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                     id_communities = communityDTO.id_communities,
                     community = communityDTO.community,
                     city = communityDTO.city,
-                    state = communityDTO.state
+                    state = communityDTO.state,
+                    id_host = communityDTO.tbl_id_hosts
             };
             }
             // Send the viewmodel to the view
@@ -115,7 +119,7 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
             {
                 return View(editVM);
             }
-            //get session from the database
+            //get community from the database
             using (CMC_DB_Connection context = new CMC_DB_Connection())
             {
                 Community communityDTO = context.Communities.Find(editVM.id_communities);
@@ -126,6 +130,7 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                 communityDTO.community = editVM.community;
                 communityDTO.city = editVM.city;
                 communityDTO.state = editVM.state;
+                communityDTO.tbl_id_hosts = editVM.id_host;
 
                 //save changes
                 context.SaveChanges();
@@ -146,7 +151,7 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(List<ManageCommunityViewModel> collectionOfCommunityVM)
         {
-            //filter collection of users on is selected
+            //filter collection of communities on is selected
             var vmSessionsToDelete = collectionOfCommunityVM.Where(x => x.is_selected == true);
 
             using (CMC_DB_Connection context = new CMC_DB_Connection())

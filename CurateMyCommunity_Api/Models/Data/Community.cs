@@ -26,7 +26,7 @@ namespace CurateMyCommunity_Api.Models.Data
         public string state { get; set; }
 
         [DataMember]
-        [Column("tbl_id_hosts", Order = 1), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("tbl_id_hosts", Order = 1)]
         public int tbl_id_hosts { get; set; }
 
         [ForeignKey("tbl_id_hosts")]

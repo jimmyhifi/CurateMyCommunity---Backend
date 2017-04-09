@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CurateMyCommunity_Api.Areas.Admin.Models.ManageHosts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,8 +14,6 @@ namespace CurateMyCommunity_Api.Areas.Admin.Models.ManageCommunities
 
         public string state { get; set; }
 
-        public string host { get; set; }
-
-        public string twitter_handle { get; set; }
+        public int id_host { get; set; }
     }
 }

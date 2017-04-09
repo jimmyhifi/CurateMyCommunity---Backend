@@ -67,7 +67,9 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                     latitude = newExhibit.latitude,
                     longitude = newExhibit.longitude,
                     name = newExhibit.name,
-                    description = newExhibit.description
+                    description = newExhibit.description,
+                    tbl_id_communities = newExhibit.id_community,
+                    tbl_id_images = newExhibit.id_image
             };
                 //Add to DbContext
                 newExhibitDTO = context.Exhibits.Add(newExhibitDTO);
@@ -101,7 +103,9 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                     latitude = exhibitDTO.latitude,
                     longitude = exhibitDTO.longitude,
                     name = exhibitDTO.name,
-                    description = exhibitDTO.description
+                    description = exhibitDTO.description,
+                    id_community = exhibitDTO.tbl_id_communities,
+                    id_image = exhibitDTO.tbl_id_images
                 };
             }
             // Send the viewmodel to the view
@@ -129,6 +133,8 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                 sessionDTO.latitude = editVM.latitude;
                 sessionDTO.longitude = editVM.longitude;
                 sessionDTO.description = editVM.description;
+                sessionDTO.tbl_id_communities = editVM.id_community;
+                sessionDTO.tbl_id_images = editVM.id_image;
 
                 //save changes
                 context.SaveChanges();

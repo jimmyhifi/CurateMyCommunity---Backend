@@ -18,6 +18,9 @@
             &nbsp;
         </th>
         <th>
+            Id
+        </th>
+        <th>
             Host
         </th>
         <th>
@@ -33,6 +36,9 @@
         <td>
             @Html.HiddenFor(x => Model[i].id_hosts)
             @Html.CheckBoxFor(x => Model[i].is_selected)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_hosts)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.host_name)

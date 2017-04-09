@@ -18,6 +18,9 @@
             &nbsp;
         </th>
         <th>
+            Id
+        </th>
+        <th>
             Community
         </th>
         <th>
@@ -25,6 +28,9 @@
         </th>
         <th>
             State
+        </th>
+        <th>
+            Host
         </th>
         <th></th>
     </tr>
@@ -38,6 +44,9 @@
             @Html.CheckBoxFor(x => Model[i].is_selected)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.id_communities)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.community)
         </td>
         <td>
@@ -45,6 +54,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_host)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.id_communities })
