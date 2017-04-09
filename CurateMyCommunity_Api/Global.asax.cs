@@ -48,7 +48,7 @@ namespace CurateMyCommunity_Api
             //IIdentity userIdentity = new GenericIdentity(username);
             //IPrincipal newUserObj = new System.Security.Principal.GenericPrincipal(userIdentity, roles);
 
-            //update the context.user with our IPrincipal
+            ////update the context.user with our IPrincipal
             //Context.User = newUserObj;
         }
 
