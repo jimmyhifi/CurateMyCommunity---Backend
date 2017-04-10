@@ -118,5 +118,136 @@ namespace CurateMyCommunity_Api.Controllers
 
             return PartialView(userNavVM);
         }
+
+        public ActionResult UserProfile(int? id = null)
+        {
+            // Capture Logged in User
+            string username = User.Identity.Name;
+
+            // Retrieve the user from database
+            UserProfileViewModel profileVM;
+            using (CMC_DB_Connection context = new CMC_DB_Connection())
+            {
+                // Get User from the database
+                User userDTO;
+                if (id.HasValue)
+                {
+                    userDTO = context.Users.Find(id.Value);
+                }
+                else
+                {
+                    userDTO = context.Users.FirstOrDefault(row => row.username == username);
+                }
+
+                if (userDTO == null)
+                {
+                    return Content("Invalid Username");
+                }
+                // populate our UserProfileViewModel
+                profileVM = new UserProfileViewModel()
+                {
+                    dateCreated = userDTO.date_created,
+                    email = userDTO.email,
+                    firstname = userDTO.firstname,
+                    id_user = userDTO.id_users,
+                    lastname = userDTO.lastname,
+                    username = userDTO.username
+                };
+            }
+
+            // Return the view with the ViewModel
+            return View(profileVM);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            // Get the user by Id
+
+            EditViewModel editVM;
+            using (CMC_DB_Connection context = new CMC_DB_Connection())
+            {
+                // Get user from database
+                User userDTO = context.Users.Find(id);
+
+                if (userDTO == null)
+                {
+                    return Content("Invalid Id");
+                }
+                // create a EditViewModel
+                editVM = new EditViewModel()
+                {
+                    id_user = userDTO.id_users,
+                    email = userDTO.email,
+                    firstname = userDTO.firstname,
+                    lastname = userDTO.lastname,
+                    username = userDTO.username
+                };
+            }
+            // Send the viewmodel to the view
+            return View(editVM);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditViewModel editVM)
+        {
+            //Variables
+            bool needsPasswordReset = false;
+            bool usernameHasChanged = false;
+
+            // Validate Model
+            if (!ModelState.IsValid)
+            {
+                return View(editVM);
+            }
+
+            //Check for password change
+            if (!string.IsNullOrWhiteSpace(editVM.password))
+            {
+                //Compare password with password confirm
+                if (editVM.password != editVM.passwordConfirm)
+                {
+                    ModelState.AddModelError("", "Password and PasswordConfirm must match");
+                    return View(editVM);
+                }
+                else
+                {
+                    needsPasswordReset = true;
+                }
+            }
+            // get our user form the database
+            using (CMC_DB_Connection context = new CMC_DB_Connection())
+            {
+                // Get our DTO
+                User userDTO = context.Users.Find(editVM.id_user);
+                if (userDTO == null) { return Content("Invalid User Id"); }
+
+                // CHeck for username change
+                if (userDTO.username != editVM.username)
+                {
+
+                    userDTO.username = editVM.username;
+                    usernameHasChanged = true;
+                }
+
+                // set/update values from the viewmodel
+                userDTO.firstname = editVM.firstname;
+                userDTO.email = editVM.email;
+                userDTO.lastname = editVM.lastname;
+
+                if (needsPasswordReset)
+                {
+                    userDTO.password = PasswordStorage.CreateHash(editVM.password);
+                }
+                // save changes
+                context.SaveChanges();
+            }
+            if (usernameHasChanged || needsPasswordReset)
+            {
+                TempData["LogoutMessage"] = "After a username or password change. Please log in with the new credentials.";
+                return RedirectToAction("Logout");
+            }
+            return RedirectToAction("UserProfile");
+        }
     }
 }

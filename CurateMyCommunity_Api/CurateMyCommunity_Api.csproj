@@ -217,8 +217,10 @@
     <Compile Include="Models\Data\Role.cs" />
     <Compile Include="Models\Data\User.cs" />
     <Compile Include="Models\Data\UserRole.cs" />
+    <Compile Include="Models\ViewModels\Account\EditViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\LoginUserViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\UserNavPartialViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -311,6 +313,8 @@
     <Content Include="Views\AccountLogin\Login.cshtml" />
     <Content Include="Views\AccountLogin\UserNavPartial.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\AccountLogin\UserProfile.cshtml" />
+    <Content Include="Views\AccountLogin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

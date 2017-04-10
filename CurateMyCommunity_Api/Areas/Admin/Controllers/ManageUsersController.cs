@@ -94,84 +94,86 @@ namespace CurateMyCommunity_Api.Areas.Admin.Controllers
                 return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public ActionResult Edit(int userId)
-        {
-            // Get the user by Id
+        //Below code commented out because I dont want admin to have the rights to change account info 
 
-            EditUserViewModel editVM;
-            using (CMC_DB_Connection context = new CMC_DB_Connection())
-            {
-                // Get user from database
-                User userDTO = context.Users.Find(userId);
+        //[HttpGet]
+        //public ActionResult Edit(int userId)
+        //{
+        //    // Get the user by Id
 
-                if (userDTO == null)
-                {
-                    return Content("Invalid Id");
-                }
-                // create a EditViewModel
-                editVM = new EditUserViewModel()
-                {
-                    id_users = userDTO.id_users,
-                    email = userDTO.email,
-                    firstname = userDTO.firstname,
-                    lastname = userDTO.lastname,
-                    username = userDTO.username
-                };
-            }
-            // Send the viewmodel to the view
-            return View(editVM);
-        }
+        //    EditUserViewModel editVM;
+        //    using (CMC_DB_Connection context = new CMC_DB_Connection())
+        //    {
+        //        // Get user from database
+        //        User userDTO = context.Users.Find(userId);
+
+        //        if (userDTO == null)
+        //        {
+        //            return Content("Invalid Id");
+        //        }
+        //        // create a EditViewModel
+        //        editVM = new EditUserViewModel()
+        //        {
+        //            id_users = userDTO.id_users,
+        //            email = userDTO.email,
+        //            firstname = userDTO.firstname,
+        //            lastname = userDTO.lastname,
+        //            username = userDTO.username
+        //        };
+        //    }
+        //    // Send the viewmodel to the view
+        //    return View(editVM);
+        //}
 
         // POST: Admin/ManageUsers/Edit/
-        [HttpPost]
-        public ActionResult Edit(EditUserViewModel editVM)
-        {
-            //Variables
-            bool needsPasswordReset = false;
+        //[HttpPost]
+        //public ActionResult Edit(EditUserViewModel editVM)
+        //{
+        //    //Variables
+        //    bool needsPasswordReset = false;
 
-            // Validate Model
-            if (!ModelState.IsValid)
-            {
-                return View(editVM);
-            }
+        //    // Validate Model
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(editVM);
+        //    }
 
-            //Check for password change
-            if (!string.IsNullOrWhiteSpace(editVM.password))
-            {
-                //Compare password with password confirm
-                if (editVM.password != editVM.passwordConfirm)
-                {
-                    ModelState.AddModelError("", "Password and PasswordConfirm must match");
-                    return View(editVM);
-                }
-                else
-                {
-                    needsPasswordReset = true;
-                }
-            }
-            // get our user form the database
-            using (CMC_DB_Connection context = new CMC_DB_Connection())
-            {
-                // Get our DTO
-                User userDTO = context.Users.Find(editVM.id_users);
-                if (userDTO == null) { return Content("Invalid User Id"); }
+        //    //Check for password change
+        //    if (!string.IsNullOrWhiteSpace(editVM.password))
+        //    {
+        //        //Compare password with password confirm
+        //        if (editVM.password != editVM.passwordConfirm)
+        //        {
+        //            ModelState.AddModelError("", "Password and PasswordConfirm must match");
+        //            return View(editVM);
+        //        }
+        //        else
+        //        {
+        //            needsPasswordReset = true;
+        //        }
+        //    }
+        //    // get our user form the database
+        //    using (CMC_DB_Connection context = new CMC_DB_Connection())
+        //    {
+        //        // Get our DTO
+        //        User userDTO = context.Users.Find(editVM.id_users);
+        //        if (userDTO == null) { return Content("Invalid User Id"); }
 
 
-                // set/update values from the viewmodel
-                userDTO.firstname = editVM.firstname;
-                userDTO.email = editVM.email;
-                userDTO.lastname = editVM.lastname;
+        //        // set/update values from the viewmodel
+        //        userDTO.firstname = editVM.firstname;
+        //        userDTO.email = editVM.email;
+        //        userDTO.lastname = editVM.lastname;
 
-                if (needsPasswordReset)
-                {
-                    userDTO.password = PasswordStorage.CreateHash(editVM.password);
-                }
-                // save changes
-                context.SaveChanges();
-            }
-            return RedirectToAction("Index");
-        }
+        //        if (needsPasswordReset)
+        //        {
+        //            userDTO.password = PasswordStorage.CreateHash(editVM.password);
+        //        }
+        //        // save changes
+        //        context.SaveChanges();
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         // POST: Admin/ManageUsers/Delete
         [HttpPost]
