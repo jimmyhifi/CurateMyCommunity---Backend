@@ -36,55 +36,55 @@ namespace CurateMyCommunity_Api.Controllers
             return Ok(exhibit);
         }
 
-        // PUT: api/Exhibits/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutExhibit(int id, Exhibit exhibit)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Exhibits/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutExhibit(int id, Exhibit exhibit)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != exhibit.id_exhibits)
-            {
-                return BadRequest();
-            }
+        //    if (id != exhibit.id_exhibits)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(exhibit).State = EntityState.Modified;
+        //    db.Entry(exhibit).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ExhibitExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ExhibitExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-        // POST: api/Exhibits
-        [ResponseType(typeof(Exhibit))]
-        public IHttpActionResult PostExhibit(Exhibit exhibit)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Exhibits
+        //[ResponseType(typeof(Exhibit))]
+        //public IHttpActionResult PostExhibit(Exhibit exhibit)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Exhibits.Add(exhibit);
-            db.SaveChanges();
+        //    db.Exhibits.Add(exhibit);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = exhibit.id_exhibits }, exhibit);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = exhibit.id_exhibits }, exhibit);
+        //}
 
         // DELETE: api/Exhibits/5
         //[ResponseType(typeof(Exhibit))]

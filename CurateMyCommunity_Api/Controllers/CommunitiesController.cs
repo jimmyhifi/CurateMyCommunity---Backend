@@ -36,55 +36,55 @@ namespace CurateMyCommunity_Api.Controllers
             return Ok(community);
         }
 
-        // PUT: api/Communities/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCommunity(int id, Community community)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Communities/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutCommunity(int id, Community community)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != community.id_communities)
-            {
-                return BadRequest();
-            }
+        //    if (id != community.id_communities)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(community).State = EntityState.Modified;
+        //    db.Entry(community).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CommunityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CommunityExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-        // POST: api/Communities
-        [ResponseType(typeof(Community))]
-        public IHttpActionResult PostCommunity(Community community)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Communities
+        //[ResponseType(typeof(Community))]
+        //public IHttpActionResult PostCommunity(Community community)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Communities.Add(community);
-            db.SaveChanges();
+        //    db.Communities.Add(community);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = community.id_communities }, community);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = community.id_communities }, community);
+        //}
 
         // DELETE: api/Communities/5
         //[ResponseType(typeof(Community))]

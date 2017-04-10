@@ -35,55 +35,55 @@ namespace CurateMyCommunity_Api.Controllers
             return Ok(images);
         }
 
-        // PUT: api/Images/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutImages(int id, Image images)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Images/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutImages(int id, Image images)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != images.id_images)
-            {
-                return BadRequest();
-            }
+        //    if (id != images.id_images)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(images).State = EntityState.Modified;
+        //    db.Entry(images).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ImagesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ImagesExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-        // POST: api/Images
-        [ResponseType(typeof(Image))]
-        public IHttpActionResult PostImages(Image images)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Images
+        //[ResponseType(typeof(Image))]
+        //public IHttpActionResult PostImages(Image images)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Images.Add(images);
-            db.SaveChanges();
+        //    db.Images.Add(images);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = images.id_images }, images);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = images.id_images }, images);
+        //}
 
         // DELETE: api/Images/5
         //[ResponseType(typeof(Images))]

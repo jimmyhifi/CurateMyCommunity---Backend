@@ -35,55 +35,55 @@ namespace CurateMyCommunity_Api.Controllers
             return Ok(hosts);
         }
 
-        // PUT: api/Hosts/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutHosts(int id, Host hosts)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Hosts/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutHosts(int id, Host hosts)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != hosts.id_hosts)
-            {
-                return BadRequest();
-            }
+        //    if (id != hosts.id_hosts)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(hosts).State = EntityState.Modified;
+        //    db.Entry(hosts).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HostsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!HostsExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-        // POST: api/Hosts
-        [ResponseType(typeof(Host))]
-        public IHttpActionResult PostHosts(Host hosts)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Hosts
+        //[ResponseType(typeof(Host))]
+        //public IHttpActionResult PostHosts(Host hosts)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Hosts.Add(hosts);
-            db.SaveChanges();
+        //    db.Hosts.Add(hosts);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = hosts.id_hosts }, hosts);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = hosts.id_hosts }, hosts);
+        //}
 
         // DELETE: api/Hosts/5
         //[ResponseType(typeof(Hosts))]
