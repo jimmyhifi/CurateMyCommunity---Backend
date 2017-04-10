@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.id_images)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.image_url)
+            <a href="@Html.DisplayFor(modelItem => item.image_url)">@Html.DisplayFor(modelItem => item.image_url)</a>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.id_images })
